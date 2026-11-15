@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06080e">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Rohan Chauhan Trades Journals</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Sora:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#06080e;--bg2:#0b1020;--card:rgba(18,24,40,.74);--fld:rgba(255,255,255,.05);--ink:#eceff6;--mut:#8791a8;--line:rgba(255,255,255,.08);--gold:#e2bb55;--gg:linear-gradient(135deg,#f6e3a1,#d4a838 48%,#a67c1a);--up:#2fd4a0;--dn:#ff5d6c;--sh:0 12px 34px rgba(0,0,0,.5);--glow:rgba(226,187,85,.11);color-scheme:dark}
+:root[data-theme="light"]{--bg:#f4f0e6;--bg2:#fffdf7;--card:rgba(255,253,247,.9);--fld:rgba(60,45,10,.05);--ink:#1a1812;--mut:#7b7566;--line:rgba(60,45,10,.13);--gold:#9a7210;--gg:linear-gradient(135deg,#dcb650,#a67c1a);--up:#0e8a5e;--dn:#c8372d;--sh:0 10px 28px rgba(60,45,10,.11);--glow:rgba(166,124,26,.14);color-scheme:light}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;padding:env(safe-area-inset-top,0px) 0 calc(96px + env(safe-area-inset-bottom,0px));color:var(--ink);font:14.5px/1.5 Sora,system-ui,-apple-system,"Segoe UI",sans-serif;background:radial-gradient(900px 520px at 50% -8%,var(--glow),transparent 62%),radial-gradient(620px 420px at 100% 100%,rgba(80,110,210,.10),transparent 60%),var(--bg);background-attachment:fixed;min-height:100vh}
+main{max-width:560px;margin:0 auto;padding:16px 14px}
+header{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:16px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand img{width:40px;height:40px;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.brand h1{font:700 15.5px/1.15 'Playfair Display',Georgia,serif;margin:0;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eb{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);font-weight:500}
+h2{font:600 19px 'Playfair Display',Georgia,serif;margin:22px 2px 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:var(--sh);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.hero{background:linear-gradient(150deg,rgba(226,187,85,.17),var(--card) 58%);border-color:rgba(226,187,85,.3)}
+.big{font:700 42px/1.1 'Playfair Display',Georgia,serif;letter-spacing:-.5px;margin:4px 0 2px}
+.gt{background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent}
+.k{font:600 20px 'Playfair Display',Georgia,serif}
+.sub{color:var(--mut);font-size:12px}
+.up{color:var(--up)}.dn{color:var(--dn)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.rg svg{width:100%;max-width:92px;display:block;margin:0 auto}
+.rt{fill:none;stroke:var(--line);stroke-width:5}.rf{fill:none;stroke-width:5;stroke-linecap:round}
+.rv{fill:var(--ink);font:600 15px 'Playfair Display',serif}
+label{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin:11px 0 4px}
+input,select,textarea,button{font:inherit;color:var(--ink)}
+input,select,textarea{width:100%;background:var(--fld);border:1px solid var(--line);border-radius:11px;padding:10px 11px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+select option{background:var(--bg2);color:var(--ink)}
+.btn{background:var(--gg);color:#1b1405;border:0;border-radius:12px;padding:12px 16px;font-weight:600;width:100%;margin-top:12px;letter-spacing:.03em;box-shadow:0 6px 18px rgba(212,168,56,.22);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn.sm{width:auto;padding:6px 12px;margin:0;font-size:12px;border-radius:999px}
+.alert{border:1px solid rgba(255,93,108,.4);background:linear-gradient(90deg,rgba(255,93,108,.14),transparent);padding:11px 13px;border-radius:14px;margin-bottom:10px;font-size:13px}
+.alert.ok{border-color:rgba(47,212,160,.45);background:linear-gradient(90deg,rgba(47,212,160,.13),transparent)}
+.alert.in{border-color:rgba(226,187,85,.45);background:linear-gradient(90deg,rgba(226,187,85,.13),transparent)}
+.quote{font:italic 600 15.5px/1.45 'Playfair Display',Georgia,serif}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0;padding-bottom:0}
+.chip{display:inline-block;font-size:10px;letter-spacing:.08em;font-weight:600;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.chip.b{color:var(--up);border-color:var(--up)}.chip.s{color:var(--dn);border-color:var(--dn)}.chip.g{color:var(--gold);border-color:var(--gold)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.cal div{aspect-ratio:1;border-radius:9px;font-size:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--fld);border:1px solid var(--line)}
+.cal .h{aspect-ratio:auto;background:none;border:0;color:var(--mut);font-size:10px}
+.chk{display:flex;gap:10px;align-items:center;margin:8px 0;font-size:13.5px}
+.chk input{width:18px;height:18px;accent-color:#d4a838}
+.bar{height:7px;border-radius:6px;background:var(--fld);overflow:hidden;margin:7px 0}
+.bar i{display:block;height:100%;background:var(--gg)}
+.bdg{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:3px 11px;margin:4px 4px 0 0;font-size:11.5px;color:var(--mut)}
+.bdg.on{border-color:var(--gold);color:var(--gold)}
+.v{display:none}.v.on{display:block}
+svg{display:block}
+nav{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));max-width:540px;margin:0 auto;display:flex;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:6px 2px;box-shadow:var(--sh);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:9}
+nav button{flex:1;background:none;border:0;color:var(--mut);font-size:9px;letter-spacing:.03em;padding:6px 0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+nav svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+nav button.on{color:var(--gold)}nav button.on svg{filter:drop-shadow(0 0 6px var(--gold))}
+.pf{width:auto;max-width:96px;border-radius:999px;padding:7px 10px;font-size:12px}
+.pill{width:auto;padding:7px 11px;border-radius:999px;font-size:12px;margin:0}
+.note{font-size:11px;color:var(--mut);margin-top:10px}
+a{color:var(--gold)}
+</style>
+</head>
+<body>
+<main><div id="app"></div></main>
+<nav id="nav"></nav>
+<script>
+const $=s=>document.querySelector(s);
+const PR={XAUUSD:[100,0],XAGUSD:[5000,0],EURUSD:[1e5,0],GBPUSD:[1e5,0],AUDUSD:[1e5,0],NZDUSD:[1e5,0],USDJPY:[1e5,1],USDCAD:[1e5,1],USDCHF:[1e5,1],BTCUSD:[1,0],US30:[1,0],NAS100:[1,0]};
+const pv=(s,p)=>{const c=PR[s]||[100,0];return c[1]?(p?c[0]/p:0):c[0]};
+const AIP={
+ groq:{n:'Groq Cloud',u:'https://api.groq.com/openai/v1/chat/completions',m:['llama-3.3-70b-versatile','llama-3.1-8b-instant'],l:'console.groq.com'},
+ openrouter:{n:'OpenRouter',u:'https://openrouter.ai/api/v1/chat/completions',m:['openrouter/auto','meta-llama/llama-3.3-70b-instruct:free','deepseek/deepseek-chat-v3-0324:free'],l:'openrouter.ai/keys'},
+ mistral:{n:'Mistral (free trial)',u:'https://api.mistral.ai/v1/chat/completions',m:['mistral-small-latest','open-mistral-nemo','mistral-large-latest'],l:'console.mistral.ai'}};
+const NAV=[['dash','Home','Home','M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z'],['add','Add','Add','M12 5v14M5 12h14'],['list','Trades','Trades','M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01'],['goals','Goals','Goals','M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2z'],['diary','Diary','Diary','M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 19a2 2 0 0 1 2-2h13'],['cal','Insights','Insights','M4 20V10M10 20V4M16 20v-7M22 20H2'],['tools','Tools','Tools','M4 7h10M18 7h2M4 17h2M10 17h10M14 5v4M8 15v4']];
+const MIS=['Koi nahi','FOMO','Revenge','Overtrade','SL hataya','Early exit'],MOOD=['Calm','Focused','Excited','Anxious','Angry','Tired'],NEWS=['Koi nahi','NFP','FOMC','CPI','Other'],SES=['Asia','London','New York','Overlap'];
+const DM={'Koi nahi':'None','SL hataya':'SL removed'};
+const Q=[['Discipline hi aapka asli edge hai.','Discipline is your real edge.'],['Target pura? Screen band karo, profit ghar le jao.','Target hit? Close the screen and take the profit home.'],['Ek bura trade chhodna bhi ek acha trade hai.','Skipping a bad trade is also a good trade.'],['Pehle capital bachao, phir profit banao.','Protect capital first, profit comes second.'],['Process follow karo, result khud aayega.','Follow the process and the results follow.'],['Overtrading profit ka sabse bada dushman hai.','Overtrading is the biggest enemy of profit.'],['Chhote consistent din bade mahine banate hain.','Small consistent days build big months.'],['Market kal bhi khulega. Aaj ki galti kal ka lesson hai.','The market opens again tomorrow. Today’s mistake is tomorrow’s lesson.']];
+let T=[],D={},PB=[],LIM=0,FS='',DD='',TAB='dash',cm=new Date(),S={wl:0,bal:1000,goal:0,dt:0,mt:0,wt:0,cd:30,cool:0,lang:'hi',ai:'groq',keys:{},mdl:{},auto:''};
+try{T=JSON.parse(localStorage.getItem('gj_t')||'[]').filter(t=>!t.demo);LIM=+localStorage.getItem('gj_lim')||0;S=Object.assign(S,JSON.parse(localStorage.getItem('gj_s')||'{}'));PB=JSON.parse(localStorage.getItem('gj_pb')||'[]');D=JSON.parse(localStorage.getItem('gj_d')||'{}')}catch(e){}
+if(!AIP[S.ai])S.ai='groq';S.keys=S.keys||{};S.mdl=S.mdl||{};
+const L=(h,e)=>S.lang==='en'?e:h;
+const dv=v=>S.lang==='en'&&DM[v]?DM[v]:v;
+const opts=(arr,sel)=>arr.map(o=>`<option value="${esc(o)}"${o===sel?' selected':''}>${esc(dv(o))}</option>`).join('');
+const save=()=>{try{localStorage.setItem('gj_t',JSON.stringify(T));localStorage.setItem('gj_lim',LIM);localStorage.setItem('gj_s',JSON.stringify(S));localStorage.setItem('gj_pb',JSON.stringify(PB));localStorage.setItem('gj_d',JSON.stringify(D))}catch(e){}};
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const money=v=>(v<0?'-':'')+'$'+Math.abs(v).toFixed(2);
+const cls=v=>v>=0?'up':'dn';
+const byDate=(a,b)=>a.date.localeCompare(b.date);
+const sorted=()=>T.filter(t=>!FS||t.sym===FS).sort(byDate);
+const day=t=>t.date.slice(0,10);
+const ld=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const today=()=>ld(new Date());
+const mins=t=>{if(!t.cdate)return null;const m=Math.round((new Date(t.cdate)-new Date(t.date))/6e4);return isNaN(m)||m<0?null:m};
+const fmtDur=m=>m==null?'–':m<60?m+'m':m<1440?Math.floor(m/60)+'h '+(m%60)+'m':Math.floor(m/1440)+'d '+Math.floor(m%1440/60)+'h';
+const avg=x=>x.length?x.reduce((p,c)=>p+c,0)/x.length:0;
+const sumP=a=>a.reduce((x,t)=>x+t.pnl,0);
+const wkStart=()=>{const w=new Date();w.setDate(w.getDate()-((w.getDay()+6)%7));return ld(w)};
+const nm=n=>+n.toPrecision(6);
+DD=today();
+
+function stats(a){
+  const n=a.length,w=a.filter(t=>t.pnl>0),l=a.filter(t=>t.pnl<0),net=sumP(a),gp=sumP(w),gl=Math.abs(sumP(l));
+  let eq=0,pk=0,dd=0;a.forEach(t=>{eq+=t.pnl;pk=Math.max(pk,eq);dd=Math.max(dd,pk-eq)});
+  const hs=a.map(mins).filter(m=>m!=null);
+  return{n,wr:n?w.length/n*100:0,net,pf:gl?gp/gl:(gp?99:0),exp:n?net/n:0,dd,avgR:avg(a.filter(t=>t.r!=null).map(t=>t.r)),hold:hs.length?avg(hs):null};
+}
+function disc(a){const x=a.filter(t=>t.chk!=null);return x.length?Math.round(x.filter(t=>t.chk===3).length/x.length*100):null}
+
+/* Discipline guard: daily target, max trades, loss limits, cool-off */
+function guard(){
+  const td=T.filter(t=>day(t)===today()),tp=sumP(td),n=td.length,wp=sumP(T.filter(t=>day(t)>=wkStart())),r=[];
+  if(S.dt>0&&tp>=S.dt)r.push(['t',L(`Daily target pura ho gaya (${money(tp)}). Ab trading band karo aur profit protect karo.`,`Daily target achieved (${money(tp)}). Stop trading and protect your profit.`)]);
+  if(S.mt>0&&n>=S.mt)r.push(['m',L(`Aaj ke max trades (${S.mt}) ho gaye. Aur trade overtrading hai.`,`Max trades for today (${S.mt}) reached. More trades means overtrading.`)]);
+  if(LIM>0&&tp<=-LIM)r.push(['l',L(`Daily loss limit hit (${money(tp)}). Aaj ke liye band.`,`Daily loss limit hit (${money(tp)}). Done for today.`)]);
+  if(S.wl>0&&wp<=-S.wl)r.push(['w',L(`Weekly loss limit hit (${money(wp)}). Is hafte ruk jao.`,`Weekly loss limit hit (${money(wp)}). Pause for this week.`)]);
+  if(S.cool>Date.now())r.push(['c',L(`Cool-off chal raha hai: ${Math.ceil((S.cool-Date.now())/6e4)} min baaki. Lagatar losses ke baad break zaroori hai.`,`Cool-off active: ${Math.ceil((S.cool-Date.now())/6e4)} min left. A break is needed after consecutive losses.`)]);
+  if(S.wt>0&&wp>=S.wt)r.push(['x',L(`Weekly target pura (${money(wp)}). Size aadha rakho aur profit lock karo.`,`Weekly target achieved (${money(wp)}). Halve your size and lock in the profit.`)]);
+  return{tp,n,wp,r,block:r.some(x=>'tmlwc'.includes(x[0]))};
+}
+function motivation(g){
+  const all=[...T].sort(byDate),l2=all.slice(-2),hit=g.r.some(x=>x[0]==='t');
+  if(hit)return L('Shabaash! Aaj ka target pura. Sabse bada edge ab ruk jaana hai.','Well done! Today’s target is done. Your biggest edge now is to stop.');
+  if(l2.length===2&&l2.every(t=>t.pnl<0))return L('Ek loss aapko define nahi karta. Break lo, process par wapas aao.','One loss does not define you. Take a break and return to your process.');
+  if(g.n===0)return L('Naya din, naya plan. Sirf A+ setup ka intezaar karo.','New day, new plan. Wait only for A+ setups.');
+  const d=Math.floor((new Date()-new Date(new Date().getFullYear(),0,0))/864e5);return L(...Q[d%Q.length]);
+}
+
+function chart(a){
+  if(a.length<2)return `<div class="sub" style="padding:22px 0 6px">${L('Equity curve ke liye kam se kam 2 trades chahiye.','At least 2 trades are needed for the equity curve.')}</div>`;
+  let e=0;const p=[0,...a.map(t=>e+=t.pnl)],mn=Math.min(...p),mx=Math.max(...p),r=(mx-mn)||1,W=320,H=120;
+  const X=i=>i/(p.length-1)*W,Y=v=>H-10-(v-mn)/r*(H-26);
+  const pts=p.map((v,i)=>X(i).toFixed(1)+','+Y(v).toFixed(1)).join(' '),col=p[p.length-1]>=0?'var(--up)':'var(--dn)',z=Y(0).toFixed(1);
+  return `<svg viewBox="0 0 ${W} ${H}" style="color:${col};width:100%;margin-top:10px" role="img"><defs><linearGradient id="eg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".35"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs><line x1="0" x2="${W}" y1="${z}" y2="${z}" stroke="var(--line)" stroke-dasharray="3 4"/><polygon points="0,${H} ${pts} ${W},${H}" fill="url(#eg)"/><polyline points="${pts}" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" style="filter:drop-shadow(0 0 4px currentColor)"/><circle cx="${W}" cy="${Y(p[p.length-1]).toFixed(1)}" r="3.5" fill="currentColor"/></svg>`;
+}
+const ring=(v,max,label,txt,col)=>{const R=26,C=2*Math.PI*R,q=Math.max(0,Math.min(1,v/max));return `<div class="rg"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="${R}" class="rt"/><circle cx="32" cy="32" r="${R}" class="rf" stroke="${col}" stroke-dasharray="${(q*C).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 32 32)"/><text x="32" y="37" text-anchor="middle" class="rv">${txt}</text></svg><div class="eb" style="margin-top:4px">${label}</div></div>`};
+const gbar=(lb,v,tg)=>{const p=tg>0?Math.max(0,Math.min(100,v/tg*100)):0;return `<div style="margin-top:12px"><div class="row" style="border:0;padding:0"><span class="eb">${lb}</span><span class="sub"><b class="${cls(v)}">${money(v)}</b>${tg>0?' / '+money(tg):' · '+L('target set nahi','no target set')}</span></div><div class="bar"><i style="width:${p}%"></i></div></div>`};
+const alerts=g=>g.r.map(x=>`<div class="alert ${x[0]==='x'?'ok':''}"><b>${x[0]==='t'?'✔ ':x[0]==='x'?'✔ ':'⛔ '}</b>${esc(x[1])}</div>`).join('');
+
+function dash(){
+  const a=sorted(),s=stats(a),d=disc(a),g=guard(),mp=sumP(T.filter(t=>t.date.startsWith(today().slice(0,7))));
+  $('#v-dash').innerHTML=alerts(g)+`<div class="card"><div class="eb">${L('Motivation','Motivation')}</div><div class="quote" style="margin-top:6px">${esc(motivation(g))}</div></div>
+  <div class="card hero"><div class="eb">Net P&amp;L ${FS?'· '+esc(FS):''}</div><div class="big ${cls(s.net)}">${money(s.net)}</div><div class="sub">${L('Aaj','Today')} <b class="${cls(g.tp)}">${money(g.tp)}</b> &nbsp;·&nbsp; ${L('Hafta','Week')} <b class="${cls(g.wp)}">${money(g.wp)}</b> &nbsp;·&nbsp; ${s.n} trades</div>${chart(a)}</div>
+  <div class="card"><div class="eb">${L('Goals ek nazar mein','Goals at a glance')}</div>${gbar(L('Daily','Daily'),g.tp,S.dt)}${gbar(L('Weekly','Weekly'),g.wp,S.wt)}${gbar(L('Monthly','Monthly'),mp,S.goal)}<div class="sub" style="margin-top:8px">${L('Aaj ke trades','Trades today')}: <b>${g.n}${S.mt>0?' / '+S.mt:''}</b></div></div>
+  <div class="card"><div class="g3">${ring(s.wr,100,L('Win rate','Win rate'),s.wr.toFixed(0)+'%','var(--gold)')}${ring(Math.min(s.pf,3),3,'Profit factor',s.pf.toFixed(2),'var(--up)')}${ring(d||0,100,'Discipline',d==null?'–':d+'%','var(--gold)')}</div></div>
+  <div class="grid"><div class="card"><div class="eb">Expectancy</div><div class="k ${cls(s.exp)}">${money(s.exp)}</div></div><div class="card"><div class="eb">Max drawdown</div><div class="k dn">${money(-s.dd)}</div></div><div class="card"><div class="eb">Average R</div><div class="k">${s.avgR.toFixed(2)}R</div></div><div class="card"><div class="eb">${L('Avg hold time','Avg hold time')}</div><div class="k">${fmtDur(s.hold==null?null:Math.round(s.hold))}</div></div></div>`+(T.length?'':`<div class="card sub">${L('Abhi koi trade nahi hai. Add tab se pehla trade daalo ya Tools mein MT5 report import karo.','No trades yet. Add your first trade or import an MT5 report from Tools.')}</div>`);
+}
+
+function list(){
+  const a=sorted().reverse();
+  $('#v-list').innerHTML=`<h2>${L('Saare trades','All trades')}</h2><div class="card">`+(a.length?a.map(t=>{const m=mins(t);return `<div class="row" style="align-items:flex-start"><div style="min-width:0"><span class="chip ${t.dir==='buy'?'b':'s'}">${t.dir==='buy'?'BUY':'SELL'}</span> <b>${esc(t.sym||'XAUUSD')}</b> <span class="sub">${esc(t.lots)} lot</span>${t.ot?` <span class="chip s">${L('RULE BREAK','RULE BREAK')}</span>`:''}<div class="sub" style="margin-top:3px">${esc(t.date.replace('T',' '))}${t.cdate?' → '+esc(t.cdate.slice(11)):''}${m!=null?' · '+fmtDur(m):''}</div><div class="sub">${esc(t.ses||'')} ${esc(t.tag||'')}${t.news&&t.news!=='Koi nahi'?' · '+esc(t.news):''}</div>${t.note?`<div class="sub">${esc(t.note)}</div>`:''}</div><div style="text-align:right;flex-shrink:0"><div class="k ${cls(t.pnl)}">${money(t.pnl)}</div><div class="sub">${t.r!=null?t.r.toFixed(2)+'R':''}</div><select data-mis="${esc(t.id)}" style="width:auto;padding:4px 6px;font-size:11px;margin:4px 0">${opts(MIS,t.mis)}</select><br><button class="btn ghost sm" data-del="${esc(t.id)}">${L('Delete','Delete')}</button></div></div>`}).join(''):`<div class="sub">${L('Koi trade nahi.','No trades.')}</div>`)+'</div>';
+}
+
+function group(a,fn){const m={};a.forEach(t=>{const k=fn(t);if(k)(m[k]=m[k]||[]).push(t)});return Object.entries(m).map(([k,v])=>({k,...stats(v)})).sort((x,y)=>y.net-x.net)}
+function gtab(title,rows){if(!rows.length)return '';return `<div class="card"><div class="eb" style="margin-bottom:6px">${title}</div>`+rows.map(r=>`<div class="row"><span>${esc(dv(r.k))} <span class="sub">${r.n} trades · ${r.wr.toFixed(0)}% win</span></span><b class="${cls(r.net)}">${money(r.net)}</b></div>`).join('')+'</div>'}
+const hb=t=>{const m=mins(t);return m==null?null:m<5?L('Scalp (5 min se kam)','Scalp (under 5 min)'):m<30?L('5 se 30 min','5 to 30 min'):m<120?L('30 min se 2 ghante','30 min to 2 hrs'):m<480?L('2 se 8 ghante','2 to 8 hrs'):L('8 ghante+','8 hrs+')};
+function overtrade(a){
+  const bd={};a.forEach(t=>(bd[day(t)]=bd[day(t)]||[]).push(t));
+  let after=0,ac=0;if(S.dt>0)Object.values(bd).forEach(x=>{let c=0;x.forEach(t=>{if(c>=S.dt){after+=t.pnl;ac++}c+=t.pnl})});
+  const fl=a.filter(t=>t.ot);
+  return{after,ac,fl,rows:group(a,t=>{const n=bd[day(t)].length;return n<=2?L('1-2 trades/din','1-2 trades/day'):n<=4?L('3-4 trades/din','3-4 trades/day'):L('5+ trades/din','5+ trades/day')})};
+}
+function insights(a){
+  const out=[];if(a.length<5)return `<div class="card sub">${L('Insights ke liye 5+ trades chahiye.','5+ trades are needed for insights.')}</div>`;
+  const W=['Ravivaar','Somvaar','Mangalvaar','Budhvaar','Guruvaar','Shukravaar','Shanivaar'],WE=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const chk=(rows,label)=>{if(rows.length>1){const w=rows[rows.length-1],b=rows[0];if(w.net<0)out.push(L(`${label}: <b>${esc(dv(w.k))}</b> mein sabse zyada loss (${money(w.net)}). Yahan size kam karo ya avoid karo.`,`${label}: biggest loss in <b>${esc(dv(w.k))}</b> (${money(w.net)}). Cut size or avoid it.`));if(b.net>0)out.push(L(`${label}: <b>${esc(dv(b.k))}</b> sabse acha (${money(b.net)}).`,`${label}: <b>${esc(dv(b.k))}</b> is your best (${money(b.net)}).`))}};
+  chk(group(a,t=>t.ses),'Session');chk(group(a,t=>(S.lang==='en'?WE:W)[new Date(t.date).getDay()]),L('Din','Day'));chk(group(a,t=>t.tag),'Setup');chk(group(a,hb),L('Hold time','Hold time'));
+  if(new Set(a.map(t=>t.sym)).size>1)chk(group(a,t=>t.sym),'Pair');
+  const mis=group(a,t=>t.mis&&t.mis!=='Koi nahi'?t.mis:null);if(mis.length){const m=mis[mis.length-1];if(m.net<0)out.push(L(`Sabse mehngi galti: <b>${esc(dv(m.k))}</b> (${m.n} baar, ${money(m.net)}).`,`Costliest mistake: <b>${esc(dv(m.k))}</b> (${m.n} times, ${money(m.net)}).`))}
+  const o=overtrade(a);
+  if(o.ac>0)out.push(L(`Daily target hit hone ke baad aapne ${o.ac} trades kiye, unka net ${money(o.after)}.`,`After hitting the daily target you took ${o.ac} more trades, net ${money(o.after)}.`));
+  if(o.fl.length)out.push(L(`Rule-break (guard active) mein ${o.fl.length} trades, net ${money(sumP(o.fl))}.`,`${o.fl.length} trades were taken while the guard was active, net ${money(sumP(o.fl))}.`));
+  const hw=a.filter(t=>t.pnl>0).map(mins).filter(m=>m!=null),hl=a.filter(t=>t.pnl<0).map(mins).filter(m=>m!=null);
+  if(hw.length>2&&hl.length>2){const w=avg(hw),l=avg(hl);out.push(l>w*1.5?L(`Losing trades ko jeetne wale trades se zyada der hold karte ho (${fmtDur(Math.round(l))} vs ${fmtDur(Math.round(w))}). Loss jaldi kaato.`,`You hold losers longer than winners (${fmtDur(Math.round(l))} vs ${fmtDur(Math.round(w))}). Cut losses faster.`):L(`Average hold: winners ${fmtDur(Math.round(w))}, losers ${fmtDur(Math.round(l))}.`,`Average hold: winners ${fmtDur(Math.round(w))}, losers ${fmtDur(Math.round(l))}.`))}
+  const nz=a.filter(t=>t.chk!=null),full=nz.filter(t=>t.chk===3),part=nz.filter(t=>t.chk<3);
+  if(full.length>2&&part.length>2)out.push(L(`Checklist poori hone par avg ${money(stats(full).exp)}, adhuri par ${money(stats(part).exp)} per trade.`,`Full checklist averages ${money(stats(full).exp)}, partial ${money(stats(part).exp)} per trade.`));
+  const mo=group(a,t=>t.mood);if(mo.length>1&&mo[mo.length-1].net<0)out.push(L(`Mood <b>${esc(mo[mo.length-1].k)}</b> mein trade karne par loss ho raha hai.`,`You lose when trading in <b>${esc(mo[mo.length-1].k)}</b> mood.`));
+  return '<div class="card">'+(out.length?out.map(x=>`<div class="row"><span>${x}</span></div>`).join(''):`<div class="sub">${L('Abhi koi saaf pattern nahi mila.','No clear pattern yet.')}</div>`)+'</div>';
+}
+function mc(a){
+  const p=a.map(t=>t.pnl);if(p.length<10)return `<div class="sub">${L('Monte Carlo ke liye 10+ trades chahiye.','Monte Carlo needs 10+ trades.')}</div>`;
+  const N=500,Ln=100,fin=[],dds=[];
+  for(let s=0;s<N;s++){let e=0,pk=0,dd=0;for(let i=0;i<Ln;i++){e+=p[Math.random()*p.length|0];pk=Math.max(pk,e);dd=Math.max(dd,pk-e)}fin.push(e);dds.push(dd)}
+  fin.sort((x,y)=>x-y);dds.sort((x,y)=>x-y);const q=(v,x)=>v[Math.floor(x*(v.length-1))],r=(l,v)=>`<div class="row"><span>${l}</span><b class="${cls(v)}">${money(v)}</b></div>`;
+  return r(L('Agle 100 trades, median','Next 100 trades, median'),q(fin,.5))+r(L('Kharab case (5%)','Bad case (5%)'),q(fin,.05))+r(L('Acha case (95%)','Good case (95%)'),q(fin,.95))+`<div class="row"><span>${L('Profit ki probability','Probability of profit')}</span><b>${(fin.filter(v=>v>0).length/N*100).toFixed(0)}%</b></div>`+r(L('Worst drawdown (95%)','Worst drawdown (95%)'),-q(dds,.95));
+}
+function calendar(){
+  const a=sorted(),y=cm.getFullYear(),m=cm.getMonth(),dm={};a.forEach(t=>{dm[day(t)]=(dm[day(t)]||0)+t.pnl});
+  const first=new Date(y,m,1).getDay(),dim=new Date(y,m+1,0).getDate(),mx=Math.max(1,...Object.values(dm).map(Math.abs));
+  const mk=`${y}-${String(m+1).padStart(2,'0')}`,mt=a.filter(t=>t.date.startsWith(mk)),mp=sumP(mt);
+  let c=['S','M','T','W','T','F','S'].map(x=>`<div class="h">${x}</div>`).join('');
+  for(let i=0;i<first;i++)c+='<div class="h"></div>';
+  for(let d=1;d<=dim;d++){const k=`${mk}-${String(d).padStart(2,'0')}`,v=dm[k];const st=v==null?'':`background:color-mix(in srgb,${v>=0?'var(--up)':'var(--dn)'} ${Math.round(20+Math.abs(v)/mx*60)}%,transparent)`;c+=`<div style="${st}">${d}${v!=null?`<b style="font-size:9.5px">${Math.round(v)}</b>`:''}</div>`}
+  const o=overtrade(a),prov=AIP[S.ai];
+  const aic=`<div class="card"><div class="eb">AI Coach · ${prov.n}</div>${S.keys[S.ai]?'':`<div class="sub" style="margin-top:6px">${L('Pehle Tools mein API key daalo.','Add your API key in Tools first.')}</div>`}<button class="btn" data-a="ai1">${L('Aakhri trade ka review','Review last trade')}</button><button class="btn ghost" data-a="ai2">${L('Weekly report','Weekly report')}</button><label>${L('Journal se poocho','Ask your journal')}</label><input id="ai-q" placeholder="${L('Mera sabse acha setup kaunsa hai?','What is my best setup?')}"><button class="btn ghost" data-a="ai3">${L('Poocho','Ask')}</button><button class="btn ghost" data-a="ai4">${L('AI se galti tag karo','AI auto-tag mistakes')}</button><div id="ai-out" style="white-space:pre-wrap;margin-top:12px;font-size:13.5px"></div></div>`;
+  $('#v-cal').innerHTML=`<div class="card"><div class="row" style="border:0;padding-top:0"><button class="btn ghost sm" id="pm">‹</button><div style="text-align:center"><b>${cm.toLocaleString(S.lang==='en'?'en':'en',{month:'long',year:'numeric'})}</b><div class="sub">${mt.length} trades · <span class="${cls(mp)}">${money(mp)}</span></div></div><button class="btn ghost sm" id="nm">›</button></div><div class="cal">${c}</div></div>`+aic+`<h2>${L('Smart insights','Smart insights')}</h2>${insights(a)}`+gtab(L('Trades per day (overtrading)','Trades per day (overtrading)'),o.rows)+gtab('Session',group(a,t=>t.ses))+gtab('Hold time',group(a,hb))+gtab('Setup',group(a,t=>t.tag))+gtab(L('News din','News days'),group(a,t=>t.news&&t.news!=='Koi nahi'?t.news:null))+(new Set(a.map(t=>t.sym)).size>1?gtab('Pair',group(a,t=>t.sym)):'')+`<h2>${L('Psychology','Psychology')}</h2>`+gtab('Mood',group(a,t=>t.mood))+gtab(L('Galti ki keemat','Cost of mistakes'),group(a,t=>t.mis&&t.mis!=='Koi nahi'?t.mis:null))+`<h2>Monte Carlo</h2><div class="card">${mc(a)}<div class="note">${L('Past trades ko random order mein chalakar 500 simulation ka andaza. Guarantee nahi hai.','Estimate from 500 simulations of your past trades in random order. Not a guarantee.')}</div></div>`;
+}
+
+function planner(){
+  const n=new Date(),y=n.getFullYear(),m=n.getMonth(),dim=new Date(y,m+1,0).getDate();let left=0,tot=0;
+  for(let d=1;d<=dim;d++){const w=new Date(y,m,d).getDay();if(w>0&&w<6){tot++;if(d>=n.getDate())left++}}
+  const wd=n.getDay(),wleft=wd===0||wd===6?0:6-wd,g=guard(),mp=sumP(T.filter(t=>t.date.startsWith(today().slice(0,7)))),out=[];
+  if(S.goal>0){const rem=S.goal-mp,exp=S.goal*(tot-left)/Math.max(tot,1);
+    out.push(rem<=0?L('Monthly target pura! Ab capital protect mode: risk aadha karo, sirf A+ setup.','Monthly target achieved! Capital-protect mode: halve risk, A+ setups only.'):L(`Monthly goal ke liye ${money(rem)} baaki. Bache ${left} trading din mein roz ~${money(rem/Math.max(left,1))} chahiye.`,`${money(rem)} left for the monthly goal. About ${money(rem/Math.max(left,1))} per day over the remaining ${left} trading days.`));
+    out.push(mp>=exp?L(`Pace: aap ${money(mp-exp)} aage ho.`,`Pace: you are ${money(mp-exp)} ahead.`):L(`Pace: aap ${money(exp-mp)} peeche ho. Size badhane ki jagah setup quality badhao.`,`Pace: you are ${money(exp-mp)} behind. Improve setup quality rather than size.`));
+    if(S.dt>0)out.push(L(`Daily target ${money(S.dt)} par aapko mahine mein sirf ~${Math.ceil(S.goal/S.dt)} din target hit karna hai. Baaki din capital bachao.`,`At a ${money(S.dt)} daily target you need only ~${Math.ceil(S.goal/S.dt)} target days this month. Protect capital on the rest.`))}
+  if(S.wt>0){const rem=S.wt-g.wp;out.push(rem<=0?L('Weekly target pura. Is hafte ab size aadha.','Weekly target achieved. Half size for the rest of the week.'):L(`Weekly target ke liye ${money(rem)} baaki${wleft?`, roz ~${money(rem/wleft)}`:''}.`,`${money(rem)} left for the weekly target${wleft?`, about ${money(rem/wleft)} per day`:''}.`))}
+  if(S.bal>0){out.push(L(`Suggested limits (balance ${money(S.bal)}): risk/trade 1% = ${money(S.bal*.01)}, daily loss 2-3% = ${money(S.bal*.02)}-${money(S.bal*.03)}, weekly loss 5% = ${money(S.bal*.05)}.`,`Suggested limits (balance ${money(S.bal)}): risk per trade 1% = ${money(S.bal*.01)}, daily loss 2-3% = ${money(S.bal*.02)}-${money(S.bal*.03)}, weekly loss 5% = ${money(S.bal*.05)}.`))}
+  out.push(L('Rule: target hit ya max trades ho gaye toh platform band. Behtar din wahi hai jisme aap ruk sake.','Rule: once the target is hit or max trades are done, close the platform. The best day is the one you could stop.'));
+  return out.map(x=>`<div class="row"><span>${x}</span></div>`).join('');
+}
+function goals(){
+  const a=sorted(),s=stats(a),d=disc(a),dm={};a.forEach(t=>dm[day(t)]=(dm[day(t)]||0)+t.pnl);
+  const days=Object.keys(dm).sort();let gs=0;for(let i=days.length-1;i>=0&&dm[days[i]]>0;i--)gs++;
+  let ds=0;for(let i=a.length-1;i>=0&&a[i].chk===3;i--)ds++;
+  const rk=s.n<20?'Beginner':(d>=70&&s.pf>=1.3?'Pro':(d>=60?'Disciplined':'Learner'));
+  const B=[[L('Pehla trade','First trade'),s.n>=1],['10 trades',s.n>=10],['50 trades',s.n>=50],[L('3 din green','3 green days'),gs>=3],[L('Discipline 80%+','Discipline 80%+'),s.n>=10&&d>=80],['PF 1.5+',s.n>=20&&s.pf>=1.5]];
+  const rs=a.filter(t=>t.sl!=null&&PR[t.sym]).map(t=>Math.abs(t.entry-t.sl)*t.lots*pv(t.sym,t.entry)),ar=avg(rs),mr=rs.length?Math.max(...rs):0,g=Object.fromEntries(group(a,t=>t.tag).map(r=>[r.k,r]));
+  const inp=(k,lb,v)=>`<div><label>${lb}</label><input type="number" step="any" data-s="${k}" value="${v||''}"></div>`;
+  $('#v-goals').innerHTML=`<div class="card"><div class="eb">${L('Targets aur limits','Targets and limits')}</div><div class="grid">${inp('dt',L('Daily target ($)','Daily target ($)'),S.dt)}${inp('mt',L('Max trades / din','Max trades / day'),S.mt)}${inp('lim',L('Daily loss limit ($)','Daily loss limit ($)'),LIM)}${inp('wt',L('Weekly target ($)','Weekly target ($)'),S.wt)}${inp('wl',L('Weekly loss limit ($)','Weekly loss limit ($)'),S.wl)}${inp('goal',L('Monthly target ($)','Monthly target ($)'),S.goal)}${inp('bal',L('Account balance ($)','Account balance ($)'),S.bal)}${inp('cd',L('Cool-off (min, 2 loss ke baad)','Cool-off (min, after 2 losses)'),S.cd)}</div><div class="note">${L('0 = band. Target ya max trades hit hone par Home aur Add par red/green alert aata hai aur us ke baad ke trades "RULE BREAK" mark hote hain.','0 = off. When a target or max trades is hit, Home and Add show an alert and later trades are marked "RULE BREAK".')}</div></div>
+  <div class="card"><div class="eb" style="margin-bottom:4px">${L('Smart plan','Smart plan')}</div>${planner()}</div>
+  <div class="card"><div class="eb">Rank</div><div class="big gt" style="font-size:30px">${rk}</div><div class="row"><span>${L('Green din streak','Green day streak')}</span><b>${gs}</b></div><div class="row"><span>${L('Disciplined trades streak','Disciplined trades streak')}</span><b>${ds}</b></div><div>${B.map(b=>`<span class="bdg ${b[1]?'on':''}">${b[0]}</span>`).join('')}</div></div>
+  <div class="card"><div class="eb" style="margin-bottom:4px">${L('Risk per trade (SL wale trades)','Risk per trade (trades with SL)')}</div><div class="row"><span>${L('Average risk','Average risk')}</span><b>${money(ar)}${S.bal>0?` (${(ar/S.bal*100).toFixed(1)}%)`:''}</b></div><div class="row"><span>${L('Sabse bada risk','Largest risk')}</span><b class="${S.bal>0&&mr/S.bal>.02?'dn':''}">${money(mr)}${S.bal>0?` (${(mr/S.bal*100).toFixed(1)}%)`:''}</b></div></div>
+  <h2>Playbook</h2><div class="card"><label style="margin-top:0">${L('Setup ka naam','Setup name')}</label><input id="pb-n"><label>${L('Rules','Rules')}</label><textarea id="pb-r" rows="2"></textarea><label>${L('Ideal entry','Ideal entry')}</label><input id="pb-e"><button class="btn" id="pbadd">${L('Setup add karo','Add setup')}</button></div>`+(PB.length?'<div class="card">'+PB.map((p,i)=>`<div class="row"><div><b>${esc(p.name)}</b><div class="sub">${esc(p.rules)}</div><div class="sub">Entry: ${esc(p.entry)}</div>${g[p.name]?`<div class="sub">${g[p.name].n} trades · ${g[p.name].wr.toFixed(0)}% win · <span class="${cls(g[p.name].net)}">${money(g[p.name].net)}</span></div>`:''}</div><button class="btn ghost sm" data-pbdel="${i}">${L('Delete','Delete')}</button></div>`).join('')+'</div>':'');
+}
+
+function diary(){
+  const ks=Object.keys(D).sort().reverse(),dp=k=>{const x=T.filter(t=>day(t)===k);return{n:x.length,p:sumP(x)}};
+  $('#v-diary').innerHTML=`<div class="card"><div class="eb">${L('Daily diary','Daily diary')}</div><label>${L('Date','Date')}</label><input type="date" id="d-date" value="${DD}"><div class="sub" id="d-sum" style="margin-top:8px"></div>
+  <div class="grid"><div><label>Mood</label><select id="d-mood">${opts(MOOD,'Calm')}</select></div><div><label>${L('Self rating','Self rating')}</label><select id="d-rate">${[5,4,3,2,1].map(n=>`<option>${n}</option>`).join('')}</select></div></div>
+  <label>${L('Market view / bias','Market view / bias')}</label><input id="d-view"><label>${L('Aaj kya sahi gaya','What went well')}</label><textarea id="d-good" rows="2"></textarea><label>${L('Aaj ki galtiyan','Mistakes today')}</label><textarea id="d-bad" rows="2"></textarea><label>${L('Seekh (lesson)','Lesson learned')}</label><textarea id="d-less" rows="2"></textarea><label>${L('Kal ka plan','Plan for tomorrow')}</label><textarea id="d-plan" rows="2"></textarea>
+  <button class="btn" id="d-save">${L('Diary save karo','Save diary')}</button><div class="sub" id="d-msg" style="margin-top:8px"></div></div>
+  <h2>${L('Pichli entries','Past entries')}</h2><div class="card">${ks.length?ks.map(k=>{const e=D[k],p=dp(k);return `<div class="row" style="align-items:flex-start"><div style="min-width:0"><b>${esc(k)}</b> <span class="chip g">${esc(e.mood||'')}</span> <span class="chip">${esc(e.rate||'')}/5</span><div class="sub">${p.n} trades · <span class="${cls(p.p)}">${money(p.p)}</span></div><div class="sub">${esc((e.less||e.good||e.view||'').slice(0,120))}</div></div><div style="flex-shrink:0"><button class="btn ghost sm" data-dopen="${esc(k)}">Open</button> <button class="btn ghost sm" data-ddel="${esc(k)}">✕</button></div></div>`}).join(''):`<div class="sub">${L('Abhi koi diary entry nahi.','No diary entries yet.')}</div>`}</div>`;
+  const e=D[DD]||{},p=dp(DD),v=(id,x)=>{$('#'+id).value=x==null?'':x};
+  $('#d-sum').innerHTML=`${L('Is din ke trades','Trades that day')}: ${p.n} · P&amp;L <b class="${cls(p.p)}">${money(p.p)}</b>`;
+  v('d-mood',e.mood||'Calm');v('d-rate',e.rate||'3');v('d-view',e.view);v('d-good',e.good);v('d-bad',e.bad);v('d-less',e.less);v('d-plan',e.plan);
+}
+
+function addGuard(){const g=guard();$('#add-guard').innerHTML=g.r.length?alerts(g)+(g.block?`<div class="sub" style="margin:-4px 0 10px">${L('Agar trade le hi liya hai toh save karo, woh "RULE BREAK" mark hoga.','If you already took the trade, save it; it will be marked "RULE BREAK".')}</div>`:''):''}
+function fillSel(){
+  const keys=Object.keys(PR),f=(id,v)=>{const s=$(id);if(s&&!s.options.length){s.innerHTML=keys.map(k=>`<option>${k}</option>`).join('');s.value=v}};f('#f-sym','XAUUSD');f('#l-sym','XAUUSD');
+  const s=$('#f-tag'),v=s.value;s.innerHTML=[...new Set(['Breakout','Pullback','Reversal','News','Other',...PB.map(p=>p.name)])].map(x=>`<option>${esc(x)}</option>`).join('');s.value=v||'Breakout';
+  const pf=$('#pf'),used=[...new Set(T.map(t=>t.sym).filter(Boolean))];pf.innerHTML=`<option value="">${L('Sab pairs','All pairs')}</option>`+used.map(x=>`<option>${esc(x)}</option>`).join('');pf.value=used.includes(FS)?FS:(FS='');
+}
+function render(){fillSel();dash();list();goals();diary();calendar();addGuard()}
+
+/* AI */
+async function callAI(p){
+  const v=AIP[S.ai],k=S.keys[S.ai];if(!k)throw new Error(L('Tools mein '+v.n+' API key daalo','Add the '+v.n+' API key in Tools'));
+  const m=S.mdl[S.ai]||v.m[0];let r;
+  try{r=await fetch(v.u,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+k},body:JSON.stringify({model:m,messages:[{role:'system',content:'You are a professional forex and gold (XAUUSD) trading coach. '+(S.lang==='en'?'Reply in clear English':'Reply in Hinglish (Hindi in Roman script)')+', in short clear points. Only analyse the trader data. Never give buy/sell signals or financial advice. Do not invent data.'},{role:'user',content:p}]})})}catch(e){throw new Error(L('Network ya browser ne request block ki. Internet aur key check karo.','Network error or request blocked. Check internet and key.'))}
+  const j=await r.json().catch(()=>({})),x=j.choices&&j.choices[0]&&j.choices[0].message&&j.choices[0].message.content;
+  if(!x)throw new Error((j.error&&(j.error.message||j.error))||L('Jawab nahi mila','No response'));return x;
+}
+function brief(a){return a.map(t=>[t.id,t.date.replace('T',' '),t.sym||'XAUUSD',t.dir,t.lots+' lot','in '+t.entry,'sl '+(t.sl==null?'none':t.sl),'out '+t.exit,'hold '+fmtDur(mins(t)),'pnl '+t.pnl.toFixed(1),t.r!=null?t.r.toFixed(2)+'R':'','ses '+(t.ses||'-'),'setup '+(t.tag||'-'),'mistake '+(t.mis||'-'),'mood '+(t.mood||'-'),'news '+(t.news||'-'),'checklist '+(t.chk==null?'-':t.chk+'/3'),t.ot?'RULE-BREAK':'',t.note||''].join(' | ')).join('\n')}
+async function ai(q,data){const el=$('#ai-out');el.textContent=L('Soch raha hoon...','Thinking...');try{el.textContent=await callAI('TRADES:\n'+data+'\n\nTASK: '+q)}catch(e){el.textContent=L('AI nahi chala: ','AI failed: ')+((e&&e.message)||'')}}
+function autoRev(){
+  const m=$('#msg');m.textContent=L('Trade save ho gaya. AI review aa raha hai...','Trade saved. AI review loading...');
+  callAI('TRADES:\n'+brief(sorted().slice(-10))+'\n\nTASK: In 3 short points review the very last trade (last line): what was right, what was wrong, one improvement.').then(t=>{m.textContent=L('Trade save ho gaya.','Trade saved.')+'\n\n'+t}).catch(e=>{m.textContent=L('Trade save ho gaya. (AI review nahi chala: ','Trade saved. (AI review failed: ')+((e&&e.message)||'')+')'});
+}
+async function aitag(){
+  const el=$('#ai-out'),Ls=sorted().filter(t=>t.pnl<0&&(!t.mis||t.mis==='Koi nahi')).slice(-20);
+  if(!Ls.length){el.textContent=L('Tag karne layak loss trade nahi mila.','No untagged losing trades.');return}
+  el.textContent=L('Tag kar raha hoon...','Tagging...');
+  try{
+    const txt=await callAI('Below are losing trades (first item is the id). For each decide if a mistake happened. Allowed: FOMO, Revenge, SL hataya, Overtrade, Early exit, Koi nahi. Decide only from the data. Output only a JSON array, nothing else: [{"id":"..","mis":".."}]\n\n'+brief(Ls));
+    const arr=JSON.parse(txt.match(/\[[\s\S]*\]/)[0]),ok=MIS.slice(1);let c=0;
+    arr.forEach(x=>{const t=T.find(y=>y.id===x.id);if(t&&ok.includes(x.mis)){t.mis=x.mis;c++}});
+    save();render();$('#ai-out').textContent=L(c+' trades par AI ne galti tag lagayi. Andaza hai, Trades tab mein badal sakte ho.',c+' trades tagged by AI. It is an estimate; edit it in the Trades tab.');
+  }catch(e){el.textContent=L('Tagging nahi ho payi: ','Tagging failed: ')+((e&&e.message)||'')}
+}
+
+/* Import: MT5 HTML report, CSV, pasted text */
+function dec(buf){const u=new Uint8Array(buf);if(u[0]===0xFF&&u[1]===0xFE)return new TextDecoder('utf-16le').decode(u);if(u[0]===0xFE&&u[1]===0xFF)return new TextDecoder('utf-16be').decode(u);let z=0;for(let i=1;i<Math.min(u.length,300);i+=2)if(u[i]===0)z++;return new TextDecoder(z>60?'utf-16le':'utf-8').decode(u)}
+function htmlRows(h){
+  const ent=s=>s.replace(/<[^>]*>/g,' ').replace(/&nbsp;|&#160;/g,' ').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&#(\d+);/g,(m,n)=>String.fromCharCode(+n)).replace(/[\s\u00a0]+/g,' ').trim();
+  return h.split(/<tr[\s>]/i).slice(1).map(r=>{const c=[],re=/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi;let m;while((m=re.exec(r)))c.push(ent(m[1]));return c}).filter(r=>r.length);
+}
+function parseRows(rows,semi){
+  const num=s=>{let x=String(s==null?'':s).replace(/[\s\u00a0]/g,'');if(semi)x=x.replace(',','.');const v=parseFloat(x);return isNaN(v)?0:v};
+  const tm=s=>{const m=String(s||'').match(/(\d{4})[.\-\/](\d\d)[.\-\/](\d\d)[ T](\d\d):(\d\d)/);return m?`${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}`:''};
+  const nsym=s=>{s=(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'');return Object.keys(PR).find(k=>s.startsWith(k))||s||'XAUUSD'};
+  let c=0,dup=0,hdr=null,mode='',ix={},pend=[],seen=false;
+  const add=o=>{
+    if(T.some(t=>t.date===o.date&&t.entry===o.entry&&t.lots===o.lots&&t.sym===o.sym)){dup++;return}
+    const rk=o.sl&&o.sl!==o.entry&&PR[o.sym]?Math.abs(o.entry-o.sl)*o.lots*pv(o.sym,o.entry):0;
+    T.push({id:'i'+Date.now()+'_'+(c+dup),date:o.date,cdate:o.cdate||null,sym:o.sym,dir:o.dir,lots:o.lots,entry:o.entry,sl:o.sl||null,exit:o.exit,fee:Math.abs(o.fee||0),pnl:o.pnl,r:rk?o.gross/rk:null,ses:'',tag:'Import',mis:'Koi nahi',mood:'',chk:null,note:''});c++;
+  };
+  rows.forEach(r=>{
+    const lw=r.map(x=>x.toLowerCase().trim());
+    if(lw.includes('symbol')&&lw.includes('type')&&lw.includes('volume')){
+      hdr=lw;mode=lw.includes('position')?'pos':(lw.includes('deal')?'deal':'x');if(mode!=='x')seen=true;
+      const al=k=>lw.reduce((x,v,i)=>(v===k&&x.push(i),x),[]);
+      ix={ot:al('time')[0],ct:al('time')[1],sym:al('symbol')[0],ty:al('type')[0],dr:al('direction')[0],vol:al('volume')[0],op:al('price')[0],cp:al('price')[1],sl:al('s / l')[0],cm:al('commission')[0],fe:al('fee')[0],sw:al('swap')[0],pr:al('profit')[0]};return;
+    }
+    if(!hdr||mode==='x')return;
+    const ty=(r[ix.ty]||'').toLowerCase();
+    if(mode==='pos'){
+      let o=null;
+      if((ty==='buy'||ty==='sell')&&tm(r[ix.ot])&&(ix.ct==null||tm(r[ix.ct])))o={date:tm(r[ix.ot]),cdate:tm(r[ix.ct]),sym:nsym(r[ix.sym]),dir:ty,lots:num(r[ix.vol]),entry:num(r[ix.op]),sl:num(r[ix.sl]),exit:num(r[ix.cp]),cm:num(r[ix.cm]),sw:num(r[ix.sw]),pr:num(r[ix.pr])};
+      else{const tk=r.map(x=>x.trim()).filter(x=>x!==''),j=tk.findIndex(x=>/^(buy|sell)$/i.test(x));
+        if(j>=3&&tm(tk[j-3])){const k=tk.findIndex((x,i)=>i>j+2&&tm(x));if(k>0)o={date:tm(tk[j-3]),cdate:tm(tk[k]),sym:nsym(tk[j-1]),dir:tk[j].toLowerCase(),lots:num(tk[j+1]),entry:num(tk[j+2]),sl:k-(j+3)>=2?num(tk[j+3]):0,exit:num(tk[k+1]),cm:num(tk[k+2]),sw:num(tk[k+3]),pr:num(tk[k+4])}}}
+      if(o)add({...o,fee:o.cm+o.sw,pnl:o.pr+o.cm+o.sw,gross:o.pr});
+    }else{
+      const dr=(r[ix.dr]||'').toLowerCase(),t=tm(r[ix.ot]);if(!t||(ty!=='buy'&&ty!=='sell'))return;
+      const cm=num(r[ix.cm])+num(r[ix.fe])+num(r[ix.sw]),sy=nsym(r[ix.sym]);
+      if(dr==='in')pend.push({sym:sy,type:ty,vol:num(r[ix.vol]),price:num(r[ix.op]),time:t,cm});
+      else if(dr.includes('out')){const i=pend.findIndex(p=>p.sym===sy&&p.type!==ty);if(i>=0){const p=pend.splice(i,1)[0],pr=num(r[ix.pr]);add({date:p.time,cdate:t,sym:sy,dir:p.type,lots:num(r[ix.vol]),entry:p.price,exit:num(r[ix.op]),sl:0,fee:cm+p.cm,pnl:pr+cm+p.cm,gross:pr})}}
+    }
+  });
+  return{c,dup,found:seen};
+}
+function importText(text){
+  text=String(text||'').replace(/^\uFEFF/,'');let rows,semi=false;
+  if(/<tr[\s>]/i.test(text))rows=htmlRows(text);
+  else{const del=text.includes('\t')?'\t':(text.split(';').length>text.split(',').length?';':',');semi=del===';';rows=text.split(/\r?\n/).map(l=>l.split(del).map(c=>c.replace(/^"|"$/g,'').trim()))}
+  return parseRows(rows,semi);
+}
+function doImport(text){const r=importText(text),el=$('#imsg');
+  if(!r.found||r.c+r.dup===0){el.textContent=L('Is file mein Positions table nahi mila. MT5 mein History tab se Report (HTML) ya CSV export karo; report mein Positions section hona chahiye.','No Positions table found. In MT5 export a Report (HTML) or CSV from the History tab; it must contain the Positions section.');return}
+  save();render();el.textContent=L(`${r.c} trades import hue, ${r.dup} pehle se the (skip).`,`${r.c} trades imported, ${r.dup} duplicates skipped.`)}
+
+/* Backup */
+function bkData(){return JSON.stringify({t:T,pb:PB,d:D,s:{...S,keys:{},cool:0},lim:LIM})}
+function restore(text){try{const d=JSON.parse(text),o=Array.isArray(d)?{t:d}:d;if(!o.t)throw 0;T=o.t.filter(t=>!t.demo);PB=o.pb||[];D=o.d||{};const s=Object.assign({},o.s||{});delete s.keys;delete s.mdl;S=Object.assign(S,s);LIM=o.lim||0;save();buildUI();render();return true}catch(e){return false}}
+async function exportBk(){
+  const data=bkData(),C=window.Capacitor,ta=$('#bk-text');ta.value=data;ta.style.display='';
+  if(C&&C.isNativePlatform&&C.isNativePlatform()&&C.Plugins&&C.Plugins.Filesystem&&C.Plugins.Share){try{const r=await C.Plugins.Filesystem.writeFile({path:'rohan-journal-backup.json',data,directory:'CACHE',encoding:'utf8'});await C.Plugins.Share.share({title:'Rohan Journal backup',url:r.uri});return}catch(e){}}
+  try{const u=URL.createObjectURL(new Blob([data],{type:'application/json'})),a=document.createElement('a');a.href=u;a.download='rohan-journal-backup.json';a.click()}catch(e){}
+}
+
+/* UI */
+function rrUI(){
+  const g=id=>parseFloat($('#'+id).value),sym=$('#f-sym').value,s=$('#f-dir').value==='buy'?1:-1,en=g('f-entry'),sl=g('f-sl'),ex=g('f-exit'),tp=g('f-tp'),lots=g('f-lots'),el=$('#rr');
+  if(!el)return;
+  if(isNaN(en)||isNaN(sl)||!(lots>0)){el.innerHTML=`<div class="sub">${L('Entry, SL aur lots daalo, risk-reward apne aap calculate hoga.','Enter entry, SL and lots; risk-reward is calculated automatically.')}</div>`;return}
+  const k=pv(sym,en),dist=Math.abs(en-sl),rk=dist*lots*k,bad=(s>0&&sl>=en)||(s<0&&sl<=en),has=x=>!isNaN(x);
+  const rew=has(ex)?(ex-en)*s*lots*k:has(tp)?(tp-en)*s*lots*k:null,pr=has(tp)?(tp-en)*s*lots*k/rk:null,ar=has(ex)?(ex-en)*s*lots*k/rk:null;
+  const fr=x=>x>=0?'1:'+x.toFixed(2):x.toFixed(2)+'R';
+  el.innerHTML=(bad?`<div class="alert">${L('SL galat side par hai (buy mein SL entry se neeche, sell mein upar hona chahiye).','SL is on the wrong side (for buys it must be below entry, for sells above).')}</div>`:'')+
+   `<div class="g3"><div><div class="eb">Risk</div><b>${k?money(rk):'–'}</b><div class="sub">${nm(dist)} pts</div></div><div><div class="eb">${has(ex)?'Reward (exit)':'Reward (TP)'}</div><b class="${rew==null?'':cls(rew)}">${rew==null?'–':money(rew)}</b><div class="sub">${rew==null?'':nm(Math.abs((has(ex)?ex:tp)-en))+' pts'}</div></div><div><div class="eb">R:R</div><b class="${(ar!=null?ar:pr)==null?'':cls(ar!=null?ar:pr)}">${(ar!=null?ar:pr)==null?'–':fr(ar!=null?ar:pr)}</b></div></div>`+(pr!=null&&ar!=null?`<div class="sub" style="margin-top:6px">${L('Planned','Planned')} ${fr(pr)} · ${L('Actual','Actual')} ${fr(ar)}</div>`:'');
+}
+function durUI(){const o=$('#f-date').value,c=$('#f-cdate').value,m=o&&c?Math.round((new Date(c)-new Date(o))/6e4):null;$('#dur').textContent=m==null?'–':(m<0?L('Close time open se pehle hai','Close time is before open'):fmtDur(m))}
+function autoSes(){const v=$('#f-date').value;if(!v)return;const h=new Date(v).getUTCHours();$('#f-ses').value=h>=12&&h<16?'Overlap':h>=7&&h<12?'London':h>=16&&h<21?'New York':'Asia'}
+function aiUI(){const p=S.ai,v=AIP[p],cur=S.mdl[p]||v.m[0],pre=v.m.includes(cur);$('#s-ai').value=p;$('#s-key').value=S.keys[p]||'';$('#s-mdl').innerHTML=v.m.map(m=>`<option>${m}</option>`).join('')+`<option value="__c">${L('Custom model...','Custom model...')}</option>`;$('#s-mdl').value=pre?cur:'__c';$('#s-cm').style.display=pre?'none':'';$('#s-cm').value=pre?'':cur;$('#s-link').innerHTML=`${L('Free API key yahan banao','Get a free API key at')}: <b>${v.l}</b>`}
+function buildUI(){
+  const f=(h,e)=>L(h,e);
+  $('#app').innerHTML=`<header><div class="brand"><img src="icon-192.png" alt=""><h1>Rohan Chauhan<br>Trades Journals</h1></div><div style="display:flex;gap:6px;align-items:center"><select id="pf" class="pf"></select><button class="btn ghost sm" id="lang">${S.lang==='en'?'हिं':'EN'}</button><button class="btn ghost sm" id="th" aria-label="Theme">◐</button></div></header>
+<section class="v" id="v-dash"></section>
+<section class="v" id="v-add"><div id="add-guard"></div><div class="card"><div class="eb">${f('Naya trade','New trade')}</div>
+<div class="grid"><div><label>Pair</label><select id="f-sym"></select></div><div><label>${f('Direction','Direction')}</label><select id="f-dir"><option value="buy">Buy</option><option value="sell">Sell</option></select></div>
+<div><label>Open time</label><input type="datetime-local" id="f-date"></div><div><label>Close time</label><input type="datetime-local" id="f-cdate"></div></div>
+<div class="sub" style="margin-top:6px">Duration: <b id="dur">–</b></div>
+<div class="grid"><div><label>Lots</label><input id="f-lots" type="number" step="any" value="0.01"></div><div><label>Entry</label><input id="f-entry" type="number" step="any"></div>
+<div><label>Stop loss</label><input id="f-sl" type="number" step="any"></div><div><label>${f('Target TP (optional)','Target TP (optional)')}</label><input id="f-tp" type="number" step="any"></div>
+<div><label>Exit</label><input id="f-exit" type="number" step="any"></div><div><label>${f('Fees ($)','Fees ($)')}</label><input id="f-fee" type="number" step="any" value="0"></div></div>
+<div id="rr" style="margin-top:12px"></div>
+<label>${f('Net P&L ($) optional, MT5 wala asli','Net P&L ($) optional, actual from MT5')}</label><input id="f-pl" type="number" step="any">
+<div class="grid"><div><label>Session</label><select id="f-ses">${opts(SES,'London')}</select></div><div><label>Setup</label><select id="f-tag"></select></div>
+<div><label>${f('Galti','Mistake')}</label><select id="f-mis">${opts(MIS,'Koi nahi')}</select></div><div><label>Mood</label><select id="f-mood">${opts(MOOD,'Calm')}</select></div>
+<div><label>${f('News din','News day')}</label><select id="f-news">${opts(NEWS,'Koi nahi')}</select></div></div>
+<label>Pre-trade checklist</label>
+<div class="chk"><input type="checkbox" id="c1"><span>${f('Setup mere rules se match hua','Setup matched my rules')}</span></div><div class="chk"><input type="checkbox" id="c2"><span>${f('Stop loss laga diya','Stop loss placed')}</span></div><div class="chk"><input type="checkbox" id="c3"><span>${f('Risk 1% ke andar hai','Risk is within 1%')}</span></div>
+<label>${f('Note','Note')}</label><textarea id="f-note" rows="2"></textarea>
+<button class="btn" id="save">${f('Trade save karo','Save trade')}</button><div class="sub" id="msg" style="margin-top:10px;white-space:pre-wrap"></div></div></section>
+<section class="v" id="v-list"></section><section class="v" id="v-goals"></section><section class="v" id="v-diary"></section><section class="v" id="v-cal"></section>
+<section class="v" id="v-tools">
+<div class="card"><div class="eb">${f('Language aur theme','Language and theme')}</div><label>${f('Bhasha','Language')}</label><select id="s-lang"><option value="hi">Hinglish</option><option value="en">English</option></select></div>
+<div class="card"><div class="eb">${f('Lot calculator','Lot calculator')}</div><div class="grid"><div><label>Pair</label><select id="l-sym"></select></div><div><label>Balance ($)</label><input id="l-bal" type="number" value="1000"></div><div><label>Risk %</label><input id="l-risk" type="number" step="0.1" value="1"></div><div><label>${f('SL distance (price)','SL distance (price)')}</label><input id="l-sl" type="number" step="any" value="5"></div></div>
+<label>${f('Current price (USDJPY, USDCAD, USDCHF ke liye)','Current price (for USDJPY, USDCAD, USDCHF)')}</label><input id="l-px" type="number" step="any"><button class="btn" id="lc">${f('Lot nikalo','Calculate lot')}</button><div class="k" id="l-out" style="margin-top:12px"></div>
+<div class="note">${f('Gold: 1 lot = 100 oz. Forex: 1 lot = 100,000 units. Index aur crypto ka contract size broker ke hisaab se alag ho sakta hai.','Gold: 1 lot = 100 oz. Forex: 1 lot = 100,000 units. Index and crypto contract sizes vary by broker.')}</div></div>
+<div class="card"><div class="eb">AI Coach</div><label>Provider</label><select id="s-ai">${Object.entries(AIP).map(([k,v])=>`<option value="${k}">${v.n}</option>`).join('')}</select><div class="sub" id="s-link" style="margin-top:6px"></div>
+<label>API key</label><input id="s-key" type="password" autocomplete="off"><label>Model</label><select id="s-mdl"></select><input id="s-cm" placeholder="${f('Model ka naam likho','Type model name')}" style="display:none;margin-top:8px">
+<label>${f('Har trade save ke baad AI review','AI review after every saved trade')}</label><select id="s-auto"><option value="">${f('Band','Off')}</option><option value="1">${f('Chalu','On')}</option></select>
+<div class="note">${f('Key sirf aapke device mein save hoti hai, backup mein nahi jaati. Free tier ki limits provider badalte rehte hain. Model ka naam error de toh provider ki site se naya naam daalo.','The key is stored only on your device and is not included in backups. Free-tier limits change; if a model name errors, copy a current one from the provider site.')}</div></div>
+<div class="card"><div class="eb">${f('MT5 import','MT5 import')}</div><div class="sub" style="margin-top:6px">${f('MT5 mein History tab, right click, Report, HTML (ya CSV) save karo. File yahan choose karo, ya report ka text neeche paste karo.','In MT5 open the History tab, right click, Report, save as HTML (or CSV). Choose the file here or paste the report text below.')}</div>
+<input type="file" id="imp" accept=".html,.htm,.csv,.txt" style="margin-top:10px"><label>${f('Ya yahan paste karo','Or paste here')}</label><textarea id="imp-text" rows="3"></textarea><button class="btn ghost" id="imp-go">${f('Paste kiya hua import karo','Import pasted text')}</button><div class="sub" id="imsg" style="margin-top:8px"></div></div>
+<div class="card"><div class="eb">Backup</div><button class="btn" id="exp">${f('Backup banao / share karo','Create / share backup')}</button><textarea id="bk-text" rows="3" style="display:none;margin-top:10px" placeholder="Backup"></textarea>
+<div style="display:flex;gap:8px"><button class="btn ghost" id="bk-copy">${f('Copy','Copy')}</button><button class="btn ghost" id="bk-rest">${f('Is text se restore','Restore from text')}</button></div>
+<label>${f('Backup file se restore','Restore from file')}</label><input type="file" id="rst" accept=".json,.txt"><div class="sub" id="bmsg" style="margin-top:6px"></div>
+<button class="btn ghost" id="clr">${f('Saara data delete','Delete all data')}</button><div class="note">${f('Yeh app sirf aapke trade data ka analysis karta hai. Yeh financial advice ya trading signal nahi hai.','This app only analyses your own trade data. It is not financial advice or a trading signal.')}</div></div></section>`;
+  $('#nav').innerHTML=NAV.map(n=>`<button data-v="${n[0]}" class="${n[0]===TAB?'on':''}"><svg viewBox="0 0 24 24"><path d="${n[3]}"/></svg>${L(n[1],n[2])}</button>`).join('');
+  $('#v-'+TAB).classList.add('on');
+  const now=new Date();now.setMinutes(now.getMinutes()-now.getTimezoneOffset());$('#f-date').value=now.toISOString().slice(0,16);
+  $('#s-lang').value=S.lang;$('#s-auto').value=S.auto||'';fillSel();aiUI();autoSes();durUI();rrUI();
+}
+
+/* Events */
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;const d=b.dataset,id=b.id;
+  if(d.v){TAB=d.v;document.querySelectorAll('.v').forEach(x=>x.classList.remove('on'));$('#v-'+TAB).classList.add('on');document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x===b));scrollTo(0,0)}
+  if(d.del){T=T.filter(t=>t.id!==d.del);save();render()}
+  if(d.pbdel!=null){PB.splice(+d.pbdel,1);save();render()}
+  if(d.dopen){DD=d.dopen;diary();scrollTo(0,0)}
+  if(d.ddel){delete D[d.ddel];save();diary()}
+  if(id==='pm'){cm=new Date(cm.getFullYear(),cm.getMonth()-1,1);calendar()}
+  if(id==='nm'){cm=new Date(cm.getFullYear(),cm.getMonth()+1,1);calendar()}
+  if(id==='pbadd'){const n=$('#pb-n').value.trim();if(n){PB.push({name:n,rules:$('#pb-r').value,entry:$('#pb-e').value});save();render()}}
+  if(id==='d-save'){DD=$('#d-date').value||DD;D[DD]={mood:$('#d-mood').value,rate:$('#d-rate').value,view:$('#d-view').value,good:$('#d-good').value,bad:$('#d-bad').value,less:$('#d-less').value,plan:$('#d-plan').value};save();diary();$('#d-msg').textContent=L('Diary save ho gayi.','Diary saved.')}
+  if(d.a==='ai4')aitag();
+  if(d.a==='ai1'||d.a==='ai2'||d.a==='ai3'){const a=sorted();if(!a.length){$('#ai-out').textContent=L('Pehle kuch trades daalo.','Add some trades first.');return}
+    if(d.a==='ai1')ai('Review the very last trade (last line of the list): what was done well, what mistake happened, and one improvement in the context of earlier trades.',brief(a.slice(-15)));
+    if(d.a==='ai2'){const w=new Date();w.setDate(w.getDate()-7);const x=a.filter(t=>day(t)>=ld(w));ai('Write the weekly report for the last 7 days: strengths, weaknesses, costliest mistake, overtrading or rule-break behaviour, and 3 action points for next week.',brief(x.length?x:a.slice(-20)))}
+    if(d.a==='ai3'){const q=$('#ai-q').value.trim();if(q)ai("Trader's question: "+q,brief(a.slice(-60)))}}
+  if(id==='save')saveTrade();
+  if(id==='lc'){const sy=$('#l-sym').value,bl=+$('#l-bal').value,r=+$('#l-risk').value,s=+$('#l-sl').value,k=pv(sy,+$('#l-px').value);$('#l-out').textContent=(s>0&&bl>0&&r>0&&k>0)?`Lot size: ${(bl*r/100/(s*k)).toFixed(2)} (risk $${(bl*r/100).toFixed(2)})`:L('Balance, risk aur SL distance daalo (JPY/CAD/CHF pairs mein price bhi).','Enter balance, risk and SL distance (price too for JPY/CAD/CHF pairs).')}
+  if(id==='imp-go')doImport($('#imp-text').value);
+  if(id==='exp')exportBk();
+  if(id==='bk-copy'){const ta=$('#bk-text');ta.style.display='';if(!ta.value)ta.value=bkData();ta.select&&ta.select();try{navigator.clipboard.writeText(ta.value)}catch(x){}$('#bmsg').textContent=L('Copy ho gaya. Kisi note ya chat mein save kar lo.','Copied. Save it somewhere safe.')}
+  if(id==='bk-rest'){$('#bmsg').textContent=restore($('#bk-text').value)?L('Restore ho gaya.','Restored.'):L('Backup text sahi nahi hai.','Invalid backup text.')}
+  if(id==='clr'){if(confirm(L('Saara data (trades aur diary) delete karna hai?','Delete all data (trades and diary)?'))){T=[];D={};save();render()}}
+  if(id==='th'){const th=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=th;try{localStorage.setItem('gj_th',th)}catch(x){}}
+  if(id==='lang'){S.lang=S.lang==='en'?'hi':'en';save();buildUI();render()}
+});
+document.addEventListener('change',e=>{const t=e.target,id=t.id,d=t.dataset||{};
+  if(d.mis){const x=T.find(y=>y.id===d.mis);if(x){x.mis=t.value;save();render()}}
+  if(d.s){const v=+t.value||0;if(d.s==='lim')LIM=v;else S[d.s]=v;save();render()}
+  if(id==='d-date'){DD=t.value||DD;diary()}
+  if(id==='pf'){FS=t.value;render()}
+  if(id==='s-lang'){S.lang=t.value;save();buildUI();render()}
+  if(id==='s-ai'){S.ai=t.value;save();aiUI();calendar()}
+  if(id==='s-key'){S.keys[S.ai]=t.value.trim();save();calendar()}
+  if(id==='s-mdl'){if(t.value==='__c'){$('#s-cm').style.display='';$('#s-cm').focus()}else{S.mdl[S.ai]=t.value;$('#s-cm').style.display='none';save()}}
+  if(id==='s-cm'){const v=t.value.trim();if(v){S.mdl[S.ai]=v;save()}}
+  if(id==='s-auto'){S.auto=t.value;save()}
+  if(id==='imp'&&t.files[0])t.files[0].arrayBuffer().then(b=>doImport(dec(b)));
+  if(id==='rst'&&t.files[0])t.files[0].arrayBuffer().then(b=>{$('#bmsg').textContent=restore(dec(b))?L('Restore ho gaya.','Restored.'):L('File sahi nahi hai.','Invalid file.')});
+  if(id&&id.startsWith('f-'))formUI(id);
+});
+document.addEventListener('input',e=>{const id=e.target.id;if(id&&id.startsWith('f-'))formUI(id)});
+function formUI(id){if(id==='f-date'){autoSes();durUI()}if(id==='f-cdate')durUI();if(['f-sym','f-dir','f-entry','f-sl','f-tp','f-exit','f-lots'].includes(id))rrUI()}
+
+function saveTrade(){
+  const g=id=>$('#'+id).value,n=id=>parseFloat(g(id)),m=$('#msg');
+  const sym=g('f-sym'),en=n('f-entry'),ex=n('f-exit'),lots=n('f-lots'),sl=n('f-sl'),tp=n('f-tp'),fee=Math.abs(n('f-fee')||0),dir=g('f-dir'),ov=n('f-pl'),od=g('f-date'),cd=g('f-cdate');
+  if(!od||isNaN(en)||isNaN(ex)||!(lots>0)){m.textContent=L('Open time, entry, exit aur lots bharna zaroori hai.','Open time, entry, exit and lots are required.');return}
+  if(cd&&new Date(cd)<new Date(od)){m.textContent=L('Close time open time se pehle nahi ho sakta.','Close time cannot be before open time.');return}
+  const gd=guard(),s=dir==='buy'?1:-1,gross=(ex-en)*s*lots*pv(sym,ex),base=isNaN(ov)?gross:ov,pnl=isNaN(ov)?gross-fee:ov;
+  const rk=!isNaN(sl)&&sl!==en?Math.abs(en-sl)*lots*pv(sym,en):0,chk=['c1','c2','c3'].filter(c=>$('#'+c).checked).length;
+  T.push({id:Date.now()+''+Math.random().toString(36).slice(2,5),date:od,cdate:cd||null,sym,dir,lots,entry:en,sl:isNaN(sl)?null:sl,tp:isNaN(tp)?null:tp,exit:ex,fee,pnl,r:rk>0?base/rk:null,ses:g('f-ses'),tag:g('f-tag'),mis:g('f-mis'),mood:g('f-mood'),news:g('f-news'),chk,note:g('f-note'),ot:gd.block&&od.slice(0,10)===today()?1:0});
+  const l2=T.filter(x=>day(x)===today()).sort(byDate).slice(-2);if(S.cd>0&&l2.length===2&&l2.every(x=>x.pnl<0))S.cool=Date.now()+S.cd*60000;
+  save();render();m.textContent=L('Trade save ho gaya.','Trade saved.');if(S.auto)autoRev();
+  ['c1','c2','c3'].forEach(c=>$('#'+c).checked=false);$('#f-note').value='';$('#f-pl').value='';$('#f-cdate').value='';$('#f-tp').value='';durUI();rrUI();
+}
+
+let th='dark';try{th=localStorage.getItem('gj_th')||'dark'}catch(e){}
+document.documentElement.dataset.theme=th;
+buildUI();render();
+setInterval(()=>{if(TAB==='dash'||TAB==='add'){dash();addGuard()}},30000);
+if('serviceWorker' in navigator&&location.protocol.startsWith('http')&&!window.Capacitor)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
